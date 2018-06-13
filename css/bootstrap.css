@@ -50,11 +50,6 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-@font-face {
-     font-family: impact;
-     src: url('../assets/fonts/impact.ttf');
-}
-
 @-ms-viewport {
   width: device-width;
 }
@@ -71,18 +66,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-image: url(../assets/imgs/background.jpg);
-  background-attachment: fixed;
-}
-
-footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #6D2E33;
-    color: white;
-    text-align: center;
+  background-color: #fff;
 }
 
 [tabindex="-1"]:focus {
@@ -181,24 +165,6 @@ a {
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
-  font-family: impact;
-  text-align: center;
-}
-
-.im{
-  color: #F3E1B9;
-  text-decoration: none;
-  background-color: transparent;
-  -webkit-text-decoration-skip: objects;
-  font-family: impact;
-  text-align: left;
-  margin-left: 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.im:hover{
-  text-decoration: underline;
 }
 
 a:hover {
@@ -476,24 +442,6 @@ mark,
 .list-unstyled {
   padding-left: 0;
   list-style: none;
-}
-.navbar-login
-{
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
-}
-
-.navbar-login-session
-{
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
-}
-
-.icon-size
-{
-    font-size: 87px;
 }
 
 .list-inline {
@@ -1719,10 +1667,10 @@ pre code {
 }
 
 .table {
-  width: 96.6%;
+  width: 100%;
   max-width: 100%;
-  margin-bottom: 3rem;
-  background-color: #F3E1B9;
+  margin-bottom: 1rem;
+  background-color: transparent;
 }
 
 .table th,
@@ -1769,8 +1717,7 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  background-color: #314178;
-  color: #F3E1B9;
+  background-color: rgba(0, 0, 0, 0.075);
 }
 
 .table-primary,
@@ -1909,11 +1856,9 @@ pre code {
 }
 
 .table .thead-dark th {
-  color: #F3E1B9;
-  background-color: #6D2E33;
-  border-color: #6D2E33;
-  font-family: impact;
-  font-size: 20px;
+  color: #fff;
+  background-color: #212529;
+  border-color: #32383e;
 }
 
 .table .thead-light th {
@@ -2619,20 +2564,6 @@ fieldset:disabled a.btn {
   border-color: #4e555b;
 }
 
-#dpd{
-  font-family: impact;
-  font-size: 20px;
-  color: #F3E1B9;
-  margin-top: 50px;
-  padding: 15px;
-}
-
-#dpdi{
-  font-family: impact;
-  font-size: 18px;
-  color: #F3E1B9;
-}
-
 .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-secondary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
@@ -3222,8 +3153,8 @@ tbody.collapse.show {
 
 .dropdown-menu {
   position: absolute;
-  top: 140%;
-  left: -1;
+  top: 100%;
+  left: 0;
   z-index: 1000;
   display: none;
   float: left;
@@ -3231,10 +3162,10 @@ tbody.collapse.show {
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
-  color: red;
+  color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #6D2E33;
+  background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
@@ -3943,11 +3874,10 @@ tbody.collapse.show {
   border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  background-color: #6D2E33;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-  background-color: #6D2E33;
+  border-color: #e9ecef #e9ecef #dee2e6;
 }
 
 .nav-tabs .nav-link.disabled {
@@ -3958,8 +3888,9 @@ tbody.collapse.show {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #F3E1B9;
-  background-color: #314178;
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
 }
 
 .nav-tabs .dropdown-menu {
@@ -4082,9 +4013,9 @@ tbody.collapse.show {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  -webkit-box-align: font-size;
+  -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .navbar-toggler {
@@ -4407,13 +4338,11 @@ tbody.collapse.show {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #f3e1b9;
-  font-size: 20px;
-  padding-left: 20px
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
-  color: #AA856A;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
@@ -6206,7 +6135,7 @@ button.bg-danger:focus {
 }
 
 .bg-light {
-  background-color: #6D2E33; !important;
+  background-color: #f8f9fa !important;
 }
 
 a.bg-light:hover, a.bg-light:focus,
