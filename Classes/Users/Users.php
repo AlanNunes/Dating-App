@@ -16,10 +16,6 @@
    /**
    * @var string
    **/
-   public $Username;
-   /**
-   * @var string
-   **/
    public $Password;
    /**
    * @var string
@@ -53,6 +49,10 @@
    * @var boolean
    **/
    private $AccountDeleted;
+   /**
+   * @var integer
+   **/
+   public $Phone;
 
    // An instance of DataBase
    public $db;
@@ -69,13 +69,50 @@
 
    public function RegisterAccount()
    {
-     $sql = "INSERT INTO users (username, password, firstname, lastname, email,
-        age, gender, interestsInMen, interestsInWomen) VALUES ('{$this->Username}',
+     $sql = "INSERT INTO users (password, firstname, lastname, email,
+        age, gender, interestsInMen, interestsInWomen, phone) VALUES (
         '{$this->Password}', '{$this->FirstName}', '{$this->LastName}',
         '{$this->Email}', {$this->Age}, '{$this->Gender}', {$this->InterestsInMen},
-          {$this->InterestsInWomen})";
+          {$this->InterestsInWomen}, {$this->Phone})";
 
      return $this->db->Query($sql);
+   }
+
+   /**
+   * Checks if the email is available
+   *
+   * @return bool
+   **/
+   public function IsEmailAvailable($email)
+   {
+     $result = $this->db->Query("SELECT email FROM users WHERE email = '{$email}'");
+     if($result->num_rows)
+     {
+       return false;
+     }
+     else
+     {
+       return true;
+     }
+   }
+
+
+   /**
+   * Checks if the phone is available
+   *
+   * @return bool
+   **/
+   public function IsPhoneAvailable($phone)
+   {
+     $result = $this->db->Query("SELECT phone FROM users WHERE phone = '{$phone}'");
+     if($result->num_rows)
+     {
+       return false;
+     }
+     else
+     {
+       return true;
+     }
    }
  }
  ?>

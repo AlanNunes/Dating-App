@@ -27,11 +27,11 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="firstName">First Name</label>
-          <input type="text" class="form-control" id="firstName" placeholder="First Name">
+          <input type="text" class="form-control" id="firstname" placeholder="First Name">
         </div>
         <div class="form-group col-md-6">
           <label for="LastName">Last Name</label>
-          <input type="text" class="form-control" id="LastName" placeholder="Last Name">
+          <input type="text" class="form-control" id="lastname" placeholder="Last Name">
         </div>
       </div>
       <div class="row">
@@ -53,14 +53,14 @@
         <div class="col">
           <div class="checkbox">
             <label>
-              <input type="checkbox"> Men
+              <input type="checkbox" id="interestsInMen"> Men
             </label>
           </div>
         </div>
         <div class="col">
           <div class="checkbox">
             <label>
-              <input type="checkbox"> Women
+              <input type="checkbox" id="interestsInWomen"> Women
             </label>
           </div>
         </div>
@@ -72,7 +72,7 @@
       </div>
       <br/>
       <p>
-        <button type="button" class="btn btn-primary btn-block" style="background: #ff5d4f;">Ready !</button>
+        <button type="button" class="btn btn-primary btn-block" onclick="RegisterAccount(GetFormFields())" style="background: #ff5d4f;">Ready !</button>
       </p>
     </form>
   </div>
@@ -82,6 +82,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script>
+    /*
+    * Returns all fields of form
+    */
+    function GetFormFields(){
+      data = {
+        'email' : $("#email").val(),
+        'password' : $("#password").val(),
+        'firstname' : $("#firstname").val(),
+        'lastname' : $("#lastname").val(),
+        'age' : $("#age").val(),
+        'gender' : $("#gender").val(),
+        'interestsInMen' : $("#interestsInMen").is(":checked"),
+        'interestsInWomen' : $("#interestsInWomen").is(":checked"),
+        'phone' : $("#phone").val()
+      };
+      return data;
+    }
 
+    /*
+    * Registers user accounts
+    */
+    function RegisterAccount(data){
+      $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "Controllers/UserController.php",
+          data: {action:'RegisterAccount', 'fields':data},
+          success: function(data) {
+            console.log(data);
+          },
+          error: function(e) {
+            console.warn(e);
+          }
+      });
+    }
     </script>
 </html>
