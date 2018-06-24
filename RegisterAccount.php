@@ -111,6 +111,28 @@
           data: {action:'RegisterAccount', 'fields':data},
           success: function(data) {
             console.log(data);
+            $('input').addClass('is-valid');
+            $('select').addClass('is-valid');
+            $('input').removeClass('is-invalid');
+            $('select').removeClass('is-invalid');
+            try
+            {
+              if(data.erro)
+              {
+                if(data.invalidFields)
+                {
+                  for(i = 0; i < data.invalidFields.length; i++)
+                  {
+                    $('#'+data.invalidFields[i]).removeClass('is-valid');
+                    $('#'+data.invalidFields[i]).addClass('is-invalid');
+                  }
+                }
+              }
+            }
+            catch (e)
+            {
+              console.warn(e);
+            }
           },
           error: function(e) {
             console.warn(e);
