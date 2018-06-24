@@ -1,0 +1,63 @@
+<html lang="pt">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+ 	<!-- <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/logo/fav.ico"> -->
+	<title> Dating App </title>
+
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+</body>
+<!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+<script>
+
+/**
+* Gets geolocation every 60 seconds
+*
+* It calls 'runGeolocation' function to do the work
+*/
+setInterval(runGeolocation, 10000);
+
+/**
+* Gets users geolocation
+*
+* When geolocation is successfully caught update_function() is called to update
+* user geolocation, if else geo_error() is called and an error is displayed
+*/
+function runGeolocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(update_location, geo_error);
+  }else{
+    alert('Seu navegador não suporta Geolocation');
+  }
+}
+
+/**
+* Handle error to geolocation
+*/
+function geo_error(){
+  alert('Não foi possível obter sua localização.');
+}
+
+/**
+* Updates the current location of the user
+*/
+function update_location(position){
+  data = {
+    'action':'update_location',
+    'latitude':position.coords.latitude,
+    'longitude':position.coords.longitude
+  };
+  console.log(data);
+}
+</script>
+</html>
