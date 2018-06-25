@@ -24,28 +24,37 @@ switch ($_POST["action"]) {
 function RegisterAccount()
 {
   $fields = $_POST["fields"];
-  $formResponse = IsFormInvalid($fields);
-  if($formResponse){
-    echo json_encode(array('erro' => true, 'description' => 'Fields invalids',
-                              'invalidFields' => $formResponse));
-  }
-  else if ($fields["interestsInMen"] == "false" && $fields["interestsInWomen"] == "false")
+  $invalidFields = IsFormInvalid($fields);
+  $erro = false;
+  $responseErro = array('erro' => true, 'description' => 'Fields invalids');
+  if($invalidFields)
   {
-    echo json_encode(array('erro' => true, 'description' => 'Fields invalids',
-                              'invalidFields' =>
-                                array('interestsInMen', 'interestsInWomen')));
+    $erro = true;
+    $responseErro = $responseErro + array('invalidFields' => $invalidFields);
   }
-  else
+  if(!IsEmailAvailable(safe_data($fields["email"])))
   {
-    if(!IsEmailAvailable($fields["email"]))
+    $erro = true;
+    $responseErro = $responseErro + array('emailError' => true);
+  }
+  if(!IsPhoneAvailable(safe_data($fields["phone"])))
+  {
+    $erro = true;
+    $responseErro = $responseErro + array('phoneError' => true);
+  }
+  if(!IsEmailValid($fields["email"]))
+  {
+    $erro = true;
+    array_push($responseErro["invalidFields"], 'email');
+  }
+  if($fields['interestsInMen'] == "false" && $fields['interestsInWomen'] == "false")
+  {
+    array_push($responseErro["invalidFields"], 'interestsInMen');
+    array_push($responseErro["invalidFields"], 'interestsInWomen');
+  }
+    if ($erro)
     {
-      echo json_encode(array('erro' => true, 'description' => 'This email is
-                                already being used.', 'emailError' => true));
-    }
-    else if (!IsPhoneAvailable($fields["phone"]))
-    {
-      echo json_encode(array('erro' => true, 'description' => 'This phone is
-                                already being used.', 'phoneError' => true));
+      echo json_encode($responseErro);
     }
     else
     {
@@ -72,7 +81,6 @@ function RegisterAccount()
                                   'description' => 'Account was not registered.'));
       }
     }
-  }
 }
 
 function IsFormInvalid($fields)
@@ -113,6 +121,23 @@ function IsPhoneAvailable($phone)
   $user = new User($db);
 
   return $user->IsPhoneAvailable($phone);
+}
+
+/**
+* Checks if email is valid
+*
+* @return bool
+**/
+function IsEmailValid($email)
+{
+  if (filter_var($email, FILTER_VALIDATE_EMAIL))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 /**
