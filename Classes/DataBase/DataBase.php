@@ -51,7 +51,7 @@
    */
    public function PreventAttacks($data)
    {
-     return $this->conn->real_scape_string($data);
+     return $this->conn->real_escape_string($data);
    }
  }
  ?>

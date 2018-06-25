@@ -156,6 +156,7 @@
                 // Account was Registered
                 if (AuthUser(data.phone, data.password))
                 {
+                  console.log('Youre logged in');
                   if (typeof(Storage) !== "undefined")
                   {
                     localStorage.setItem("phone", data.phone);
