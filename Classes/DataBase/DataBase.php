@@ -45,5 +45,13 @@
    {
      return $this->conn->query($sql);
    }
+
+   /**
+   * Prevents SQL Injection
+   */
+   public function PreventAttacks($data)
+   {
+     return $this->conn->real_scape_string($data);
+   }
  }
  ?>

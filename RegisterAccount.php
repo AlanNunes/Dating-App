@@ -89,6 +89,7 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="JSControllers/login.js"></script>
     <script>
     /*
     * Returns all fields of form
@@ -148,6 +149,26 @@
                   $('#phone').removeClass('is-valid');
                   $('#phone').addClass('is-invalid');
                   $('#phoneMsgError').html('This phone is already being used');
+                }
+              }
+              else
+              {
+                // Account was Registered
+                if (AuthUser(data.phone, data.password))
+                {
+                  if (typeof(Storage) !== "undefined")
+                  {
+                    localStorage.setItem("phone", data.phone);
+                    window.location = 'index.html';
+                  }
+                  else
+                  {
+                    alert("Your browser doesn't support Local Storages");
+                  }
+                }
+                else
+                {
+                  console.warn('User was not logged in');
                 }
               }
             }

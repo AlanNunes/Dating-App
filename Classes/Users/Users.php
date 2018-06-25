@@ -114,5 +114,28 @@
        return true;
      }
    }
+
+   /**
+   * Auth User
+   *
+   * @return boolean Returns true if auth was successful. Otherwise false.
+   **/
+   public function AuthUser($identification, $password)
+   {
+     $identification = $this->db->PreventAttacks($identification);
+     $password = $this->db->PreventAttacks($password);
+
+     $result = $this->db->Query("SELECT id FROM users WHERE
+                    (email = '{$identification}' OR phone = '{$identification}')
+                                                AND password = '{$password}'");
+     if($result->num_rows)
+     {
+       return true;
+     }
+     else
+     {
+       return false;
+     }
+   }
  }
  ?>

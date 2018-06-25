@@ -15,6 +15,10 @@ switch ($_POST["action"]) {
     RegisterAccount();
     break;
 
+  case 'AuthUser':
+    AuthUser();
+    break;
+
   default:
     echo json_encode(array('erro' => true,
                         'description' => 'No action found.'));
@@ -83,6 +87,27 @@ function RegisterAccount()
     }
 }
 
+/**
+* Logs User
+*
+* @return boolean Returns true if login was successfull. Otherwise false.
+*/
+function AuthUser()
+{
+  $identification = safe_data($_POST['identification']);
+  $password = safe_data($_POST['password']);
+
+  $db = new DataBase();
+  $user = new User($db);
+
+  echo $user->AuthUser($identification, $password);
+}
+
+/**
+* Validates the Form
+*
+* @return array Returns all invalid fields. Otherwise returns is an empty array
+*/
 function IsFormInvalid($fields)
 {
   $size = sizeof($fields);
